@@ -19,5 +19,6 @@ describe "Service discovery" do
     )
 
     expect(consul.services).to include("echo")
+    expect(consul.nodes_for_service("echo")).to eq ["echo1"]
   end
 end

@@ -19,6 +19,16 @@ module Consul
       data.keys
     end
 
+    def nodes_for_service(service)
+      response = @connection.get(
+        path: "/v1/catalog/service/#{service}",
+        expects: 200,
+      )
+
+      data = JSON.parse(response.body)
+      data.map {|srv| srv.fetch("Node") }
+    end
+
     def register_service(service:, node:, address:)
       data = {
         "Node" => node,
