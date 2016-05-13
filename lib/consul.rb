@@ -1,5 +1,8 @@
 require "consul/version"
+require "consul/client"
 
 module Consul
-  # Your code goes here...
+  def self.new(*args)
+    Client.new(*args)
+  end
 end
